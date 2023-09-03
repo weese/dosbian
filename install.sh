@@ -154,6 +154,8 @@ exists() { #FILE
 # LOGIC!
 echo "INSTALLING.."
 
+execute "chroot $DEST systemctl enable getty@tty1.service"
+
 #####################################################################
 # Copy all files
 execute "rsync -av --exclude=.* $REPODIR/fs/ $DEST/"
@@ -171,6 +173,9 @@ execute "chroot $DEST systemctl enable ipxbox.service"
 
 # Install Dosbox-X
 execute "cd ../dosbox-x; make install"
+
+# Install ipxbox
+execute "cp $REPODIR/go/bin/ipxbox $DEST/usr/local/bin/"
 
 # Install Dosbox-X dependencies
 execute "chroot $DEST apt-get update"
@@ -208,16 +213,17 @@ execute "chroot $DEST systemctl disable bluetooth.service avahi-daemon.service d
 
 # boot config
 cat << EOF >> $DESTBOOT/config.txt
-
-# Use 1080p
-hdmi_group=1
-hdmi_mode=16
-
 disable_splash=1
 boot_delay=0
 dtoverlay=sdtweak,overclock_50=100
 gpu_mem=64
 EOF
+
+# # Use 1080p
+# cat << EOF >> $DESTBOOT/config.txt
+# hdmi_group=1
+# hdmi_mode=16
+# EOF
 
 # disable terminal on serial
 # execute "sed -i 's/console=serial0,115200//' $DESTBOOT/cmdline.txt"

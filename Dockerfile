@@ -24,6 +24,15 @@ WORKDIR /build/dosbox-x
 RUN sed -i -e 's@--prefix=/usr@--prefix=/mnt/ext4/usr CPPFLAGS="-march=armv8-a+simd+crypto+crc+sb -mtune=cortex-a53"@g' build-debug-sdl2
 RUN ./build-debug-sdl2
 
+RUN wget https://go.dev/dl/go1.17.linux-arm64.tar.gz
+RUN tar -C /usr/local -xzf go1.17.linux-arm64.tar.gz
+ENV PATH="/usr/local/go/bin:${PATH}"
+ENV GOPATH=/build/go
+RUN go env -w GO111MODULE=off
+RUN go get github.com/fragglet/ipxbox
+RUN go build github.com/fragglet/ipxbox
+
+
 WORKDIR /build
 
 CMD ["bash"]

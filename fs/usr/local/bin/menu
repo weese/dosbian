@@ -109,7 +109,7 @@ case $CHOICE in
             
 	    sudo sed -i '2c/usr/bin/dosbox-x >/dev/null 2>&1' /usr/local/bin/bootmachine
             sudo chmod +x /usr/local/bin/bootmachine
-            dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDosbox ECE set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
+            dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-X set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
             ;;
 
 	7)
