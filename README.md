@@ -2,8 +2,8 @@
 
 ## Dosbian 2.0
 
-After eagerly waiting for Dosbian 2.0 and due to [Carmelo Maiolino's announcement](https://cmaiolino.wordpress.com/lack-of-raspberry-pi-supplies/) of no longer developing any distros for the Raspberry Pis,
-I decided to continue the development of Dosbian on my own and continue where he left off.
+After eagerly waiting for Dosbian 2.0 and due to [Carmelo Maiolino's announcement](https://cmaiolino.wordpress.com/lack-of-raspberry-pi-supplies) of no longer developing any distros for the Raspberry Pis,
+I decided to continue the development of [Dosbian](https://cmaiolino.wordpress.com/dosbian) on my own and continue where he left off.
 It still includes the nice menus and splash screens and according copyright notes from him. Carmelo, I hope that's ok.
 
 Dosbian 2.0 includes:
@@ -20,13 +20,13 @@ If you like to support the development, you can buy me a [coffee](https://ko-fi.
 
 ## Installation
 
-To use Dosbian 2.0, download the latest release from [here](https://github.com/weese/dosbian/releases) and burn it on a microSD card, e.g. with [balenaEtcher](https://www.balena.io/etcher/).
+To use Dosbian 2.0, download the latest release from [here](https://github.com/weese/dosbian/releases) and burn it on a microSD card, e.g. with [balenaEtcher](https://www.balena.io/etcher).
 
 To connect your Raspberry Pi to your Wifi or enable the SSH server, put `ssh` or `wpa_supplicant.conf` files to your boot folder (the FAT32 partition of the microSD card) or start `raspi-config` on the Pi. More details can be found [here](https://www.raspberrypi.com/documentation/computers/configuration.html#boot-folder-contents).
 
 ## Custom Build
 
-You can build your own SD image of Raspbian for the Dosbian on your local ARM compatible machine (tested on Macbook M1) using [Docker Desktop](https://www.docker.com/get-started/).
+You can build your own SD image of Raspbian for the Dosbian on your local ARM compatible machine (tested on Macbook M1) using [Docker Desktop](https://www.docker.com/get-started).
 After installing Docker, you should tune it a bit to speed up the build process:
 
  - increase resources to e.g. 8 CPUs
@@ -45,7 +45,7 @@ make all
 ```
 
 The final image will be written into the folder `images` and is has a filename that includes a recent UTC date
-`2023-05-03-raspios-bullseye-arm64-lite_2023xxxx-xxxxxx.img`. Simply burn that image to a microSD card using [balenaEtcher](https://www.balena.io/etcher/) and boot.
+`2023-05-03-raspios-bullseye-arm64-lite_2023xxxx-xxxxxx.img`. Simply burn that image to a microSD card using [balenaEtcher](https://www.balena.io/etcher) and boot.
 
 ## The original Dosbian image
 
