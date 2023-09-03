@@ -1,0 +1,12 @@
+Doom (Shareware version)
+---YEAR---    
+C:
+CD \GAMES\DOOM
+DOOM.EXE
+
+Wolfenstein 3D (Shareware version)
+---YEAR---    
+C:
+CD \GAMES\WOLF3D
+WOLF3D.EXE
+

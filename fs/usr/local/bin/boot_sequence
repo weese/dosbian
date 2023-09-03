@@ -1,0 +1,4 @@
+#!/bin/bash
+#sleep 2s
+#/usr/bin/play /usr/local/bin/beep.wav ;
+/usr/bin/fbi -noverbose /usr/local/bin/splash.jpg

@@ -1,7 +1,0 @@
-#!/bin/bash
-# IPXBOX Configurator by Carmelo Maiolino
-
-# Edit the service file
-sudo nano /etc/systemd/system/ipxbox.service
-
-

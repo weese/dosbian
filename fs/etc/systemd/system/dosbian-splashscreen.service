@@ -1,0 +1,14 @@
+[Unit]
+Description=Dosbian loading service
+DefaultDependencies=no
+
+[Service]
+#ExecStart=/usr/bin/fbi -noverbose /usr/local/bin/splash.jpg
+ExecStart=/usr/local/bin/boot_sequence
+
+StandardInput=tty
+StandardOutput=tty
+
+
+[Install]
+WantedBy=multi-user.target

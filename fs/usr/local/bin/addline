@@ -1,0 +1,4 @@
+#!/bin/bash
+line=$1
+destination=$2
+echo $line >> $destination

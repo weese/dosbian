@@ -1,0 +1,74 @@
+#!/bin/bash
+
+HEIGHT=18
+WIDTH=66
+CHOICE_HEIGHT=16
+BACKTITLE="*** DOSBIAN HDD and Floppy disk image creator - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
+TITLE="CHOOSE WHAT MEDIA AND SIZE TO CREATE"
+MENU="PLEASE, BE SURE TO HAVE ENOUGH SPACE IN YOUR MICROSD CARD"
+
+OPTIONS=(
+        "" ""
+        "" ">>> DOSBIAN HDD CREATOR <<< "
+        "" ""
+        1 "  FLOPPY DISK 360 KB  "
+	2 "  FLOPPY DISK 720 KB  "
+	3 "  FLOPPY DISK 1,44 MB  "
+	4 "  HARD DISK 256 MB " 
+	5 "  HARD DISK 512 MB "
+	6 "  HARD DISK 1 GB"	
+	7 "  HARD DISK 2 GB"
+)
+
+
+while :
+do
+
+CHOICE=$(dialog --clear \
+                --backtitle "$BACKTITLE" \
+                --title "$TITLE" \
+                --menu "$MENU" \
+                $HEIGHT $WIDTH $CHOICE_HEIGHT \
+                "${OPTIONS[@]}" \
+                2>&1 >/dev/tty)
+exit_status4=$?
+if [ $exit_status4 -ne 0 ]; then
+	clear
+	exit
+fi;
+
+clear
+case $CHOICE in
+
+	1)  sudo mediacreator 1
+	    exit
+            ;;
+
+	2)  sudo mediacreator 2
+            exit
+	    ;;
+
+	3)  sudo mediacreator 3
+	    exit
+	    ;;
+
+	4)  sudo mediacreator 4
+	    exit
+	    ;;
+
+	5)  sudo mediacreator 5
+	    exit
+	    ;;
+
+	6)  sudo mediacreator 6
+	    exit
+	    ;;
+
+	7)  sudo mediacreator 7
+	    exit
+	    ;;
+
+esac
+
+done
+

@@ -1,0 +1,16 @@
+# SET CHANGE THE PORT AND THE PCAP_DEVICE ACCORDING TO YOUR NEEDS
+# PCAP_DEVICE CAN BE ONE OF YOUR INTERFACE: eth0, wlan0 and so on...
+
+[Unit]
+Description=Dosbian ipx server
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ipxbox --port=10000 --pcap_device=eth0
+RemainAfterExit=true
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+

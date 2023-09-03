@@ -1,0 +1,29 @@
+#!/bin/bash
+BACKTITLE="*** INFORMATION ABOUT DOSBIAN V1.5 *** "
+
+text=$(cat <<-END
+\nDOSBIAN is a Raspberry Pi distro created in 2023 by Carmelo Maiolino and David Weese.
+\n\nKeep in the palm of your hand an equivalent 486DX machine of the 90s and enjoy playing with your preferite retro software and retro games.
+\n\n\nTHE PROJECT
+\n\nWeb page: https://cmaiolino.wordpress.com/dosbian
+\nFacebook: www.facebook.com/groups/Dosbian
+\n\nVisit my web page to leave a comment, get the latest news, download new versions of Dosbian.
+\n\nIf you need help on how to start with Dosbian, please feel free to ask support to the Facebook community.
+\n\n\nTERMS OF USE
+\n\nDOSBIAN is a donationware project, this means you can modify, improve, customise it\nas you like for your own use.
+\n\nIT IS STRICTLY PROHIBITED:
+\n\n- USE DOSBIAN FOR COMMERCIAL PURPOSES.
+\n\n- DIFFUSE YOUR OWN CUSTOMIZED COPY OF DOSBIAN
+\n\n\nAWARDS
+\n\nThe existence of DOSBIAN couldn't be possible without the following gems:
+\n\n* Raspbian    - The Debian distro for Raspberry Pi (www.raspberrypi.org)
+\n* DOSBox-X    - The fantastic DOS emulator (www.dosbox-x.com)
+\n* LaunchBox   - A DOS games Frontend (www.launchbox-app.com)
+\n* Ipxbox      - A Dosbox IPX-over UDP server (github.com/fragglet/ipxbox)
+END
+)
+
+dialog --title "INFORMATION" --backtitle "$BACKTITLE"  --msgbox "$text"  44 98
+
+
+

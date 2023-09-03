@@ -1,0 +1,70 @@
+#!/bin/bash
+
+BEEP_HEIGHT=10
+BEEP_WIDTH=54
+BEEP_CHOICE_HEIGHT=8
+BACKTITLE="*** DOSBIAN CUSTOMIZATION - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
+BEEP_TITLE="ENABLE / DISABLE BEEP AT BOOT"
+FILE=/usr/local/bin/boot_sequence
+
+BEEP_OPTIONS=(
+        "" ""
+        1 " ENABLE BEEP AT BOOT"
+	2 " DISABLE BEEP AT BOOT  "
+	"" ""
+)
+
+
+
+
+
+
+function beep_changer
+{
+	dialog --backtitle "$BACKTITLE" --title "INFORMATION" --msgbox "\nPlease note, this is an experimental feature.\n\nIt may or may not work in all Raspberry Pi models.\n\nIt can slightly reduce boot time." 18 60
+        if [ $? -ne 0 ]; then
+	   clear;
+	   exit;
+	fi;
+	while :
+	do
+
+		choice=$(dialog --clear \
+                --backtitle "$BACKTITLE" \
+                --title "$BEEP_TITLE" \
+		--menu "" \
+                $BEEP_HEIGHT $BEEP_WIDTH $BEEP_CHOICE_HEIGHT \
+                "${BEEP_OPTIONS[@]}" \
+                2>&1 >/dev/tty)
+
+		if [ $? -ne 0 ]; then
+			clear;
+			exit;
+		fi;
+
+		clear
+
+		case $choice in
+
+			1) sudo sed -i -e '2,3 s/[#]//g' $FILE
+			   dialog --backtitle "$BACKTITLE" --title "INFORMATION" --msgbox "\nBeep sound successfully INSERTED in the boot sequence." 18 60
+            		   break
+	    		   ;;
+
+			2)  sudo sed -i '/sleep/ s/^/#/' $FILE
+	    		    sudo sed -i '/play/ s/^/#/' $FILE
+			    dialog --backtitle "$BACKTITLE" --title "INFORMATION" --msgbox "\nBeep sound successfully REMOVED in the boot sequence." 18 60
+			    break
+            		    ;;
+
+		esac
+	done
+}
+
+
+
+
+beep_changer
+
+
+

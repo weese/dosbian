@@ -1,0 +1,126 @@
+#!/bin/bash
+
+BACKTITLE="*** DOSBIAN HDD and Floppy disk image creator - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
+filename=$(dialog --title "Choose a name" --backtitle "$BACKTITLE" --inputbox "Enter image name: " 8 40 3>&1 1>&2 2>&3 3>&-)
+exit_status5=$?
+
+if [ $exit_status5 -ne 0 ]; then
+	clear
+	exit
+fi;
+
+clear
+
+argument=$1
+
+case $argument in
+
+	1)
+
+	printf "DOSBIAN - EMPTY FLOPPY CREATOR by Carmelo Maiolino and David Weese\n\n"
+	printf "Please wait, your 360 KB floppy image is being created... \n\n"
+	sudo cp -rf /etc/dosbianhd/floppy-360.7z /home/pi/dosbian/my_floppies/
+	printf "Process completation  20%%\n\n"
+	sudo 7z x /home/pi/dosbian/my_floppies/floppy-360.7z -o/home/pi/dosbian/my_floppies/
+	printf "Process completation  70%%\n\n"
+	sudo mv /home/pi/dosbian/my_floppies/floppy-360.img /home/pi/dosbian/my_floppies/floppy_"${filename}.img"
+	sudo rm /home/pi/dosbian/my_floppies/floppy-360.7z
+	sudo chmod -R 777 /home/pi/dosbian
+	dialog --title "Operation result" --backtitle "$BACKTITLE" --msgbox "\nYour 360 KB floppy disk image was created successfully!\n\nYou can find it under: \n\n/home/pi/dosbian/my_floppies" 16 50
+	;;
+
+
+
+	2)
+
+	printf "DOSBIAN - EMPTY FLOPPY CREATOR by Carmelo Maiolino and David Weese\n\n"
+	printf "Please wait, your 720 KB floppy image is being created... \n\n"
+	sudo cp -rf /etc/dosbianhd/floppy-720.7z /home/pi/dosbian/my_floppies/
+	printf "Process completation  20%%\n\n"
+	sudo 7z x /home/pi/dosbian/my_floppies/floppy-720.7z -o/home/pi/dosbian/my_floppies/
+	printf "Process completation  70%%\n\n"
+	sudo mv /home/pi/dosbian/my_floppies/floppy-720.img /home/pi/dosbian/my_floppies/floppy_"${filename}.img"
+	sudo rm /home/pi/dosbian/my_floppies/floppy-720.7z
+	sudo chmod -R 777 /home/pi/dosbian
+	dialog --title "Operation result" --backtitle "$BACKTITLE" --msgbox "\nYour 720 KB floppy disk image was created successfully!\n\nYou can find it under: \n\n/home/pi/dosbian/my_floppies" 16 50
+	;;
+
+
+	3)
+
+	printf "DOSBIAN - EMPTY FLOPPY CREATOR by Carmelo Maiolino and David Weese\n\n"
+	printf "Please wait, your 1,44 MB floppy image is being created... \n\n"
+	sudo cp -rf /etc/dosbianhd/floppy-1440.7z /home/pi/dosbian/my_floppies/
+	printf "Process completation  20%%\n\n"
+	sudo 7z x /home/pi/dosbian/my_floppies/floppy-1440.7z -o/home/pi/dosbian/my_floppies/
+	printf "Process completation  70%%\n\n"
+	sudo mv /home/pi/dosbian/my_floppies/floppy.img /home/pi/dosbian/my_floppies/floppy_"${filename}.img"
+	sudo rm /home/pi/dosbian/my_floppies/floppy-1440.7z
+	sudo chmod -R 777 /home/pi/dosbian
+	dialog --title "Operation result" --backtitle "$BACKTITLE" --msgbox "\nYour 1,44 MB floppy disk image was created successfully!\n\nYou can find it under: \n\n/home/pi/dosbian/my_floppies" 16 50
+	;;
+
+	4)
+
+	printf "DOSBIAN - EMPTY HDD CREATOR by Carmelo Maiolino and David Weese\n\n"
+	printf "Please wait, your 256 MB hard disk image is being created... \n\n"
+	sudo cp -rf /etc/dosbianhd/hdd-256mb.7z /home/pi/dosbian/my_hdd/
+	printf "Process completation  20%%\n\n"
+	sudo 7z x /home/pi/dosbian/my_hdd/hdd-256mb.7z -o/home/pi/dosbian/my_hdd/
+	printf "Process completation  70%%\n\n"
+	sudo mv /home/pi/dosbian/my_hdd/hdd-256mb.img /home/pi/dosbian/my_hdd/hdd_"${filename}.img"
+	sudo rm /home/pi/dosbian/my_hdd/hdd-256mb.7z
+	sudo chmod -R 777 /home/pi/dosbian
+	dialog --title "Operation result" --backtitle "$BACKTITLE" --msgbox "\nYour 256 MB hard disk images was created successfully!\n\nYou can find it under: \n\n/home/pi/dosbian/my_hdd" 16 56
+	;;
+
+
+	5)
+
+	printf "DOSBIAN - EMPTY HDD CREATOR by Carmelo Maiolino and David Weese\n\n"
+	printf "Please wait, your 512 MB hard disk image is being created... \n\n"
+	sudo cp -rf /etc/dosbianhd/hdd-512mb.7z /home/pi/dosbian/my_hdd/
+	printf "Process completation  20%%\n\n"
+	sudo 7z x /home/pi/dosbian/my_hdd/hdd-512mb.7z -o/home/pi/dosbian/my_hdd/
+	printf "Process completation  70%%\n\n"
+	sudo mv /home/pi/dosbian/my_hdd/hdd-512mb.img /home/pi/dosbian/my_hdd/hdd_"${filename}.img"
+	sudo rm /home/pi/dosbian/my_hdd/hdd-512mb.7z
+	sudo chmod -R 777 /home/pi/dosbian
+	dialog --title "Operation result" --backtitle "$BACKTITLE" --msgbox "\nYour 512 MB hard disk images was created successfully!\n\nYou can find it under: \n\n/home/pi/dosbian/my_hdd" 16 56
+	;;
+
+
+	6)
+
+	printf "DOSBIAN - EMPTY HDD CREATOR by Carmelo Maiolino and David Weese\n\n"
+	printf "Please wait, your 1 GB hard disk image is being created... \n\n"
+	sudo cp -rf /etc/dosbianhd/hdd-1gb.7z /home/pi/dosbian/my_hdd/
+	printf "Process completation  20%%\n\n"
+	sudo 7z x /home/pi/dosbian/my_hdd/hdd-1gb.7z -o/home/pi/dosbian/my_hdd/
+	printf "Process completation  70%%\n\n"
+	sudo mv /home/pi/dosbian/my_hdd/hdd-1gb.img /home/pi/dosbian/my_hdd/hdd_"${filename}.img"
+	sudo rm /home/pi/dosbian/my_hdd/hdd-1gb.7z
+	sudo chmod -R 777 /home/pi/dosbian
+	dialog --title "Operation result" --backtitle "$BACKTITLE" --msgbox "\nYour 1 GB hard disk images was created successfully!\n\nYou can find it under: \n\n/home/pi/dosbian/my_hdd" 16 56
+	;;
+
+
+	7)
+
+	printf "DOSBIAN - EMPTY HDD CREATOR by Carmelo Maiolino and David Weese\n\n"
+	printf "Please wait, your 2 GB hard disk image is being created... \n\n"
+	sudo cp -rf /etc/dosbianhd/hdd-2gb.7z /home/pi/dosbian/my_hdd/
+	printf "Process completation  20%%\n\n"
+	sudo 7z x /home/pi/dosbian/my_hdd/hdd-2gb.7z -o/home/pi/dosbian/my_hdd/
+	printf "Process completation  70%%\n\n"
+	sudo mv /home/pi/dosbian/my_hdd/hdd-2gb.img /home/pi/dosbian/my_hdd/hdd_"${filename}.img"
+	sudo rm /home/pi/dosbian/my_hdd/hdd-2gb.7z
+	sudo chmod -R 777 /home/pi/dosbian
+	dialog --title "Operation result" --backtitle "$BACKTITLE" --msgbox "\nYour 2 GB hard disk images was created successfully!\n\nYou can find it under: \n\n/home/pi/dosbian/my_hdd" 16 56
+	;;
+
+
+
+
+
+esac

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+BACKTITLE="*** DOSBIAN CONFIGURATIONS RESTORE - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
+
+configuration=$1
+if [[ $configuration -eq 1 ]]; then
+	sudo yes | cp /home/pi/backup/dosbox-x.conf /home/pi/.
+        dialog --backtitle "$BACKTITLE" --title "CONFIGURATION RESTORE" --msgbox "\nThe original DOSBOX-X configuration was restored successfully" 11 66
+	clear
+fi;
+
+if [[ $configuration -eq 2 ]]; then
+	sudo yes | cp /home/pi/backup/launchbox.conf /home/pi/dosbian/programs/launchbx/
+        dialog --backtitle "$BACKTITLE" --title "CONFIGURATION RESTORE" --msgbox "\nThe original LAUNCHBOX configuration was restored successfully" 11 66
+	clear
+fi;
+
+
+
+
