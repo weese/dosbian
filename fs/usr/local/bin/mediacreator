@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BACKTITLE="*** DOSBIAN HDD and Floppy disk image creator - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
+BACKTITLE="*** DOSBIAN-X HDD and Floppy disk image creator - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
 filename=$(dialog --title "Choose a name" --backtitle "$BACKTITLE" --inputbox "Enter image name: " 8 40 3>&1 1>&2 2>&3 3>&-)
 exit_status5=$?
 

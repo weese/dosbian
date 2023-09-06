@@ -3,7 +3,7 @@
 EDIT_HEIGHT=10
 EDIT_WIDTH=54
 EDIT_CHOICE_HEIGHT=8
-BACKTITLE="*** DOSBIAN CUSTOMIZATION - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
+BACKTITLE="*** DOSBIAN-X CUSTOMIZATION - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
 EDIT_TITLE="CHOOSE WHAT TO CUSTOMIZE"
 
 EDIT_OPTIONS=(

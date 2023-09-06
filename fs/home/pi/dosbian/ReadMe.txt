@@ -1,4 +1,4 @@
-DOSBIAN is a Raspberry Pi distro created in 2023 by Carmelo Maiolino and David Weese.
+DOSBIAN-X is a Raspberry Pi distro created in 2023 by Carmelo Maiolino and David Weese.
 
 Keep in the palm of your hand an equivalent 486DX machine of the 90s and 
 enjoy playing with your preferite retro software and retro games.

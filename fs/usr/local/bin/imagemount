@@ -4,7 +4,7 @@ destination_file=""
 drive=""
 drive_lower=""
 
-BACKTITLE="*** DOSBIAN IMAGE MOUNT HELPER - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
+BACKTITLE="*** DOSBIAN-X IMAGE MOUNT HELPER - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
 
 if [ $destination -eq 1 ]; then
 	destination_file="/home/pi/dosbox-x.conf"

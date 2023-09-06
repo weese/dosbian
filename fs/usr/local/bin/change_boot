@@ -3,7 +3,7 @@
 BOOT_HEIGHT=10
 BOOT_WIDTH=54
 BOOT_CHOICE_HEIGHT=8
-BACKTITLE="*** DOSBIAN CUSTOMIZATION - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
+BACKTITLE="*** DOSBIAN-X CUSTOMIZATION - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
 BOOT_TITLE="PRESS OK TO PROCEED OR ESC TO ABORT"
 dialog --title "$BOOT_TITLE" --backtitle "$BACKTITLE" --msgbox "\nPlease, insert a USB key containing in the root a file named 'splash.jpg'.\n\nOnce done, press OK or ESC to Abort " 12 60 
 if [ $? -ne 0 ]; then

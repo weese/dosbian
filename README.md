@@ -53,7 +53,7 @@ The final image will be written into the folder `images` and is has a filename t
 
 ## The original Dosbian image
 
-DOSBIAN is a Raspberry Pi distro created in 2020 by Carmelo Maiolino.
+DOSBIAN-X is a Raspberry Pi distro created in 2020 by Carmelo Maiolino.
 
 Keep in the palm of your hand an equivalent 486DX machine of the 90s and 
 enjoy playing with your preferite retro software and retro games.
