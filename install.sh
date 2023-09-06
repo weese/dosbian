@@ -171,19 +171,26 @@ fi
 execute "chroot $DEST systemctl enable dosbian-splashscreen.service"
 execute "chroot $DEST systemctl enable ipxbox.service"
 
-# Install Dosbox-X
-execute "cd ../dosbox-x; make install"
+# # Install Dosbox-X
+# execute "cd $REPODIR/dosbox-x; make install"
 
+# Install Dosbox versions
+execute "cp /usr/local/bin/* $DEST/usr/local/bin/"
+execute "cp -P /usr/local/lib/*.so* $DEST/usr/local/lib/"
+execute "cp -rP /usr/local/share/dosbox* $DEST/usr/local/share"
 # Install ipxbox
 execute "cp $REPODIR/go/bin/ipxbox $DEST/usr/local/bin/"
 
 # Install Dosbox-X dependencies
 execute "chroot $DEST apt-get update"
 execute "chroot $DEST apt-get install -y \
-  libsdl-net1.2:arm64 libsdl2-net-2.0-0:arm64 libpcap0.8:arm64 \
-  libslirp0:arm64 fluidsynth:arm64 libfluidsynth2:arm64 libavdevice58:arm64 libavformat58:arm64 libavcodec-dev:arm64 \
+  libsdl1.2debian:arm64 libsdl-net1.2:arm64 libsdl2-net-2.0-0:arm64 libpcap0.8:arm64 \
+  libslirp0:arm64 libavdevice58:arm64 libavformat58:arm64 libavcodec-dev:arm64 \
   libavcodec-extra:arm64 libavcodec-extra58:arm64 libswscale5:arm64 libfreetype6:arm64 \
-  fbi:arm64 dialog:arm64 mc:arm64 sox:arm64"
+  libsdl2-2.0-0:arm64 libsdl2-image-2.0-0:arm64 libopusfile0:arm64 libspeexdsp1:arm64 \
+  libpng16-16:arm64 zlib1g:arm64 libsdl-sound1.2:arm64 \
+  libncurses5:arm64 fbi:arm64 dialog:arm64 mc:arm64 sox:arm64 \
+  libsndfile1:arm64 libflac8:arm64"
 execute "chroot $DEST apt-get clean"
 
 execute "chroot $DEST systemctl disable bluetooth.service avahi-daemon.service dhcpcd.service dhcpcd5.service \

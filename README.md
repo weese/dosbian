@@ -1,26 +1,30 @@
-# Dosbian 2.0 RPi image
+# Dosbian-X - Boot directly into a 486DX on your Raspberry Pi
 
-## Dosbian 2.0
+## Dosbian-X
 
 After eagerly waiting for Dosbian 2.0 and due to [Carmelo Maiolino's announcement](https://cmaiolino.wordpress.com/lack-of-raspberry-pi-supplies) of no longer developing any distros for the Raspberry Pis,
 I decided to continue the development of [Dosbian](https://cmaiolino.wordpress.com/dosbian) on my own and continue where he left off.
-It still includes the nice menus and splash screens and according copyright notes from him. Carmelo, I hope that's ok.
+It still includes the nice menus and splash screens and according copyright notes from him (courtesy of Carmelo).
 
-Dosbian 2.0 includes:
+Dosbian-X includes:
 
-- the wonderful [DOSBox-X](https://dosbox-x.com/) emulator (accurrate successor of Dosbox)
+- all common DOSBox emulators
+  - [DOSBox-X](https://dosbox-x.com/) - modern and accurrate successor of Dosbox
+  - [DOSBox-Staging](https://dosbox-staging.github.io/) lots of enhancements (Shaders, Roland MT-32, FluidSynth)
+  - [DOSBox-ECE](https://yesterplay.net/dosboxece/) - Enhanced Community Edition (3Dfx Voodoo, Roland MT-32, FluidSynth)
+  - [DOSBox-SVN](https://sourceforge.net/projects/dosbox/) - the original
 - latest Raspberry Pi OS Lite (64-bit)
 - support for all 64-bit Raspberry Pi models (3B, 3B+, 3A+, 4, 400, CM3, CM3+, CM4, Zero 2 W)
 - build pipeline to build the SD card image
 
-If you have problems, fixes, comments please create an [issue](https://github.com/weese/dosbian/issues), [pull request](https://github.com/weese/dosbian/pulls) or start a [discussion](https://github.com/weese/dosbian/discussions).
+If you have problems, fixes, comments please create an [issue](https://github.com/weese/dosbian-x/issues), [pull request](https://github.com/weese/dosbian-x/pulls) or start a [discussion](https://github.com/weese/dosbian-x/discussions).
 Have fun and enjoy the 90s with your Raspberry Pi. More updates will follow...
 
 If you like to support the development, you can buy me a [coffee](https://ko-fi.com/davomat).
 
 ## Installation
 
-To use Dosbian 2.0, download the latest release from [here](https://github.com/weese/dosbian/releases) and burn it on a microSD card, e.g. with [balenaEtcher](https://www.balena.io/etcher).
+To use Dosbian-X, download the latest release from [here](https://github.com/weese/dosbian-x/releases) and burn it on a microSD card, e.g. with [balenaEtcher](https://www.balena.io/etcher).
 
 To connect your Raspberry Pi to your Wifi or enable the SSH server, put `ssh` or `wpa_supplicant.conf` files to your boot folder (the FAT32 partition of the microSD card) or start `raspi-config` on the Pi. More details can be found [here](https://www.raspberrypi.com/documentation/computers/configuration.html#boot-folder-contents).
 
