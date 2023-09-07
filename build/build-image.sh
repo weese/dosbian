@@ -128,7 +128,7 @@ fi
 execute "cp $IMG $OUTFILE"
 
 # Increase image to hold our extras
-execute "truncate --size=+1024M $OUTFILE"
+execute "truncate --size=+2048M $OUTFILE"
 
 # Find partions using kpartx (and remove old mappings)
 LDEV=`losetup | grep $(basename $IMG .img) | cut -d " " -f 1 | cut -d / -f3`
@@ -148,6 +148,8 @@ execute "resize2fs /dev/mapper/${LDEV}p2"
 # Mount partitions
 execute "sudo mount /dev/mapper/${LDEV}p2 $MOUNTEXT4"
 execute "sudo mount /dev/mapper/${LDEV}p1 $MOUNTFAT32"
+
+df -h
 
 # Install
 execute "../install.sh YES $BRANCH $MOUNTFAT32 $MOUNTEXT4"
