@@ -107,14 +107,14 @@ case $CHOICE in
 
 	6)
             
-	    sudo sed -i '2c/usr/bin/dosbox-x >/dev/null 2>&1' /usr/local/bin/bootmachine
+	    sudo sed -i '2c/usr/local/bin/dosbox-x >/dev/null 2>&1' /usr/local/bin/bootmachine
             sudo chmod +x /usr/local/bin/bootmachine
             dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-X set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
             ;;
 
 	7)
 
-	    sudo sed -i '2c/usr/bin/dosbox-x -conf "/home/pi/dosbian/programs/launchbx/launchbox.conf" >/dev/null 2>&1' /usr/local/bin/bootmachine
+	    sudo sed -i '2c/usr/local/bin/dosbox-x -conf "/home/pi/dosbian/programs/launchbx/launchbox.conf" >/dev/null 2>&1' /usr/local/bin/bootmachine
             sudo chmod +x /usr/local/bin/bootmachine
             dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nLAUNCHBOX set successfully!\n\nNext time you reboot, you will be brought straightly to Launchbox frontend. ' 18 40
             ;;

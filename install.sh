@@ -171,32 +171,35 @@ fi
 execute "chroot $DEST systemctl enable dosbian-splashscreen.service"
 execute "chroot $DEST systemctl enable ipxbox.service"
 
+execute "cp $REPODIR/compile.sh $DEST/root/"
+execute "chroot $DEST /root/compile.sh"
+
 # # Install Dosbox-X
 # execute "cd $REPODIR/dosbox-x; make install"
 
 # Install Dosbox versions
-execute "cp /usr/local/bin/* $DEST/usr/local/bin/"
-execute "cp -P /usr/local/lib/*.so* $DEST/usr/local/lib/"
-execute "cp -rP /usr/local/share/dosbox* $DEST/usr/local/share"
-execute "mkdir $DEST/build"
-execute "cp -rP /build/dos* /build/SDL* /build/munt /build/openglide /build/fluidsynth $DEST/build"
-df -h
-execute "chroot $DEST ldconfig"
+# execute "cp /usr/local/bin/* $DEST/usr/local/bin/"
+# execute "cp -P /usr/local/lib/*.so* $DEST/usr/local/lib/"
+# execute "cp -rP /usr/local/share/dosbox* $DEST/usr/local/share"
+# execute "mkdir $DEST/build"
+# execute "cp -rP /build/dos* /build/SDL* /build/munt /build/openglide /build/fluidsynth $DEST/build"
+# df -h
+# execute "chroot $DEST ldconfig"
 
-# Install ipxbox
-execute "cp $REPODIR/go/bin/ipxbox $DEST/usr/local/bin/"
+# # Install ipxbox
+# execute "cp $REPODIR/go/bin/ipxbox $DEST/usr/local/bin/"
 
-# Install Dosbox-X dependencies
-execute "chroot $DEST apt-get update"
-execute "chroot $DEST apt-get install -y \
-  libsdl1.2debian libsdl-net1.2 libpcap0.8 \
-  libslirp0 libavdevice58 libavformat58 libavcodec-dev \
-  libavcodec-extra libavcodec-extra58 libswscale5 libfreetype6 \
-  libopusfile0 libspeexdsp1 \
-  libpng16-16 zlib1g libsdl-sound1.2 \
-  libncurses5 fbi dialog mc sox \
-  libsndfile1 libflac8"
-execute "chroot $DEST apt-get clean"
+# # Install Dosbox-X dependencies
+# execute "chroot $DEST apt-get update"
+# execute "chroot $DEST apt-get install -y \
+#   libsdl1.2debian libsdl-net1.2 libpcap0.8 \
+#   libslirp0 libavdevice58 libavformat58 libavcodec-dev \
+#   libavcodec-extra libavcodec-extra58 libswscale5 libfreetype6 \
+#   libopusfile0 libspeexdsp1 \
+#   libpng16-16 zlib1g libsdl-sound1.2 \
+#   libncurses5 fbi dialog mc sox \
+#   libsndfile1 libflac8"
+# execute "chroot $DEST apt-get clean"
 
 execute "chroot $DEST systemctl disable bluetooth.service avahi-daemon.service dhcpcd.service dhcpcd5.service \
   systemd-timesyncd.service rpi-display-backlight.service keyboard-setup.service wifi-country.service \
