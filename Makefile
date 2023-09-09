@@ -35,7 +35,7 @@ images/${IMG_BASE}.img:
 images/${IMG}-step1.img: images/${IMG_BASE}.img
 	${EXECUTE} " \
 		cp /$< /$@; \
-		scripts/grow-image.sh /$@ 1536M; \
+		scripts/grow-image.sh /$@ 2G; \
 		scripts/execute.sh /$@ /dosbian/scripts/install-dosboxes.sh"
 
 images/${IMG}.img: images/${IMG}-step1.img

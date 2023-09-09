@@ -74,8 +74,8 @@ mount_image() {
   LDEV=`losetup | grep $(basename $1) | cut -d " " -f 1 | cut -d / -f3`
   echo "MAP LOOP DEVICE $LDEV"
   # Mount partitions
-  execute "sudo mount /dev/mapper/${LDEV}p2 $2"
-  execute "sudo mount /dev/mapper/${LDEV}p1 $2/boot"
+  execute "mount /dev/mapper/${LDEV}p2 $2"
+  execute "mount /dev/mapper/${LDEV}p1 $2/boot"
   execute "mount --bind /dev $2/dev/"
   execute "mount --bind /sys $2/sys/"
   execute "mount --bind /proc $2/proc/"
