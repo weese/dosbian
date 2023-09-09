@@ -1,4 +1,4 @@
+.AppleDouble
+.DS_Store
 images/*
-boot.dis/
-fs/boot/ssh
-fs/boot/wpa_supplicant.conf
+fs.extra/

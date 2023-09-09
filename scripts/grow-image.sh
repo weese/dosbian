@@ -16,8 +16,7 @@ fi
 echo "RESIZE IMAGE [$OUTFILE] ..."
 
 umount_all $OUTFILE
-execute "cp $IMG $OUTFILE"
-execute "truncate --size=+2048M $OUTFILE"
+execute "truncate --size=+$1 $OUTFILE"
 resize_image $OUTFILE
 
 #####################################################################

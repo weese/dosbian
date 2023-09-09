@@ -39,7 +39,7 @@ exists() { #FILE
 umount_all() {
   # Find partions using losetup and remove old mappings
   LDEVS=`losetup | grep $(basename $1) | cut -d " " -f 1 | cut -d / -f3`
-  for LDEV in LDEVS; do
+  for LDEV in $LDEVS; do
     echo "[*] UNMAP LOOP DEVICE $LDEV"
     execute "kpartx -d /dev/$LDEV || true"
   done
@@ -80,6 +80,7 @@ mount_image() {
   execute "mount --bind /sys $2/sys/"
   execute "mount --bind /proc $2/proc/"
   execute "mount --bind /dev/pts $2/dev/pts"
+  execute "mkdir -p $2/dosbian"
   execute "mount --bind /dosbian $2/dosbian"
 }
 

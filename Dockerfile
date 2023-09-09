@@ -5,7 +5,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt clean && apt-get update && \
     apt install -y kpartx fdisk rsync sudo util-linux cloud-guest-utils
 
-COPY . /dosbian
+# COPY . /dosbian
+VOLUME /dosbian
 VOLUME /images
 WORKDIR /dosbian
 

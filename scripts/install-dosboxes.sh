@@ -44,6 +44,9 @@ apt purge -y libsdl2-2.0-0 libsdl2-dev
 apt clean
 
 mkdir -p /build
+
+#####################################################################
+# UNCOMMENT LINE IF SOURCES SHOULDN'T BECOME PART OF THE IMAGE
 # mount -t tmpfs -o size=2048M tmpfs /build
 
 # Install mt32emu (Roland MT-32 support)
@@ -143,4 +146,4 @@ go get github.com/fragglet/ipxbox > /dev/null
 go build github.com/fragglet/ipxbox
 
 cd /
-# umount /build
+umount /build || true
