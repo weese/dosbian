@@ -37,13 +37,15 @@ apt clean && apt-get update && \
     libpng-dev zlib1g-dev libsdl-sound1.2-dev dos2unix cmake curl libtool \
     libsndfile1-dev libflac-dev subversion \
     libdrm-dev libgbm-dev \
-    libncurses5 fbi dialog mc sox
+    libncurses5 fbi dialog mc sox \
+    fluidsynth libfluidsynth-dev
     # libsdl2-dev libsdl2-image-dev libsdl2-net-dev
 apt build-dep -y libsdl2
 apt purge -y libsdl2-2.0-0 libsdl2-dev
 apt clean
 
 mkdir -p /build
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 #####################################################################
 # UNCOMMENT LINE IF SOURCES SHOULDN'T BECOME PART OF THE IMAGE
@@ -86,13 +88,15 @@ cd /build/openglide
 ./configure
 make -j 4 install
 
-# Install FluidSynth (SoundFont Synthesizer)
-cd /build
-git clone --depth=1 https://github.com/FluidSynth/fluidsynth.git -b $FLUIDSYNTH_BRANCH
-mkdir -p fluidsynth/build
-cd /build/fluidsynth/build
-cmake ..
-make -j4 install
+# # Install FluidSynth (SoundFont Synthesizer)
+# cd /build
+# git clone --depth=1 https://github.com/FluidSynth/fluidsynth.git -b $FLUIDSYNTH_BRANCH
+# mkdir -p fluidsynth/build
+# cd /build/fluidsynth/build
+# cmake ..
+# make -j4 install
+
+# Update the dynamic linker cache
 ldconfig
 
 # Compile Dosbox-SVN

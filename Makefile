@@ -35,7 +35,7 @@ images/${IMG_BASE}.img:
 images/${IMG}-step1.img: images/${IMG_BASE}.img
 	${EXECUTE} " \
 		cp /$< /$@; \
-		scripts/grow-image.sh /$@ 2G; \
+		scripts/grow-image.sh /$@ 2500M; \
 		scripts/execute.sh /$@ /dosbian/scripts/install-dosboxes.sh"
 
 images/${IMG}.img: images/${IMG}-step1.img
@@ -49,3 +49,10 @@ step%: images/${IMG}-step%.img
 
 .PHONY: final
 final: images/${IMG}.img
+
+# Debug into the container
+#docker run -ti --rm --name build-image-dosbian --volume ${PWD}:/dosbian --volume ${PWD}/images:/images \
+--privileged build-image-dosbian /bin/bash -c "scripts/execute.sh /images/Dosbian-X-2.1.0.img /bin/bash"
+
+# Mount network share
+#sudo mount.cifs -o user=weese //192.168.1.1/public/Software/Games perseus

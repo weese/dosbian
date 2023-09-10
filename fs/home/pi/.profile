@@ -1,4 +1,6 @@
 # ~/.profile: executed by Bourne-compatible login shells.
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
 clear 
 /usr/local/bin/bootmachine
 
