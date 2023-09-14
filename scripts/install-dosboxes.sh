@@ -38,10 +38,10 @@ apt clean && apt-get update && \
     libsndfile1-dev libflac-dev subversion \
     libdrm-dev libgbm-dev \
     libncurses5 fbi dialog mc sox \
-    fluidsynth libfluidsynth-dev
-    # libsdl2-dev libsdl2-image-dev libsdl2-net-dev
+    libxkbfile-dev fluidsynth libfluidsynth-dev \
+    libsdl2-dev libsdl2-image-dev libsdl2-net-dev
+
 apt build-dep -y libsdl2
-apt purge -y libsdl2-2.0-0 libsdl2-dev
 apt clean
 
 mkdir -p /build
@@ -134,7 +134,8 @@ mv /usr/local/bin/dosbox /usr/local/bin/dosbox-staging
 cd /build
 git clone --depth=1 https://github.com/joncampbell123/dosbox-x.git -b $DOSBOX_X_BRANCH
 cd /build/dosbox-x
-# sed -i -e 's@--prefix=/usr@--prefix=/usr/local CPPFLAGS="-march=armv8-a+simd+crypto+crc+sb -mtune=cortex-a53"@g' build-debug-sdl2
+# sed -i -e 's@--prefix=/usr@--prefix=/usr/local@g' build-debug-sdl2
+# ./build-debug-sdl2
 ./autogen.sh
 ./configure --enable-debug=heavy --prefix=/usr/local --enable-sdl2
 make -j4
