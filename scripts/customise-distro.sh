@@ -38,6 +38,7 @@ apt install -y fluidsynth
 curl https://musical-artifacts.com/artifacts/1484/ColomboMT32.sf2 -o /usr/share/sounds/sf2/ColomboMT32.sf2
 
 # Make backup of dosbox config files
+mkdir -p /home/pi/.backup
 cp /home/pi/.config/dosbox*/dosbox*.conf /home/pi/.backup/
 cp /home/pi/.dosbox/dosbox*.conf /home/pi/.backup/
 
