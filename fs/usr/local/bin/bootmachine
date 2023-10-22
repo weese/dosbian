@@ -1,2 +1,2 @@
 #!/bin/bash
-/usr/local/bin/dosbox-x >/dev/null 2>&1
+/usr/local/bin/dosbox >/dev/null 2>&1

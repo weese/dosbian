@@ -1,20 +1,11 @@
 #!/bin/bash
-destination=$1
-destination_file=""
+configuration_file=$1
 drive=""
 drive_lower=""
 
 BACKTITLE="*** DOSBIAN-X MOUNT DRIVE HELPER - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
 
-if [ $destination -eq 1 ]; then
-	destination_file="/home/pi/dosbian/dosbox-x.conf"
-fi;
-
-if [ $destination -eq 2 ]; then
-	destination_file="/home/pi/dosbian/programs/launchbx/launchbox.conf"
-fi;
-
-config_content=$(sudo cat $destination_file)
+config_content=$(sudo cat $configuration_file)
 config_content_lower=${config_content,,}
 
 
@@ -27,7 +18,7 @@ function copy_config
    while read LINE; do
 	if [ $found -eq 1 ]; then
            if [ $skip_line -ge 2 ]; then
-		sudo truncfile $line_number $destination_file /root/temp/first.txt 
+		sudo truncfile $line_number $configuration_file /root/temp/first.txt 
 		end_reached=1
 		found=0
            fi;
@@ -42,18 +33,18 @@ function copy_config
 	   echo $LINE | sudo tee -a /root/temp/second.txt > /dev/null
 	fi;
 
-   done < $destination_file
+   done < $configuration_file
    found=0
    skip_line=0
    end_reached=0
 
-   sudo addline "mount $drive $folder" /root/temp/added.txt
-   sudo joinfile /root/temp/second.txt  /root/temp/added.txt
-   sudo joinfile /root/temp/added.txt  /root/temp/first.txt
-   sudo copyfile /root/temp/first.txt $destination_file
-   sudo rm /root/temp/first.txt
-   sudo rm /root/temp/second.txt
-   sudo rm /root/temp/added.txt
+   sudo echo "mount $drive $folder" >> /root/temp/added.txt
+   sudo cat /root/temp/second.txt >> /root/temp/added.txt
+   sudo cat /root/temp/added.txt >> /root/temp/first.txt
+   sudo /usr/bin/cp /root/temp/first.txt $configuration_file
+   sudo /usr/bin/rm /root/temp/first.txt
+   sudo /usr/bin/rm /root/temp/second.txt
+   sudo /usr/bin/rm /root/temp/added.txt
 
 }
 

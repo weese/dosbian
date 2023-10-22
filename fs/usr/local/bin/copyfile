@@ -1,5 +1,0 @@
-#!/bin/bash
-source=$1
-destination=$2
-
-sudo yes | cp $source $destination

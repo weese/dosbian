@@ -9,7 +9,7 @@ text=$(cat <<-END
 \n\nVisit the project page to leave a comment, get the latest news, download new versions of Dosbian.
 \n\nIf you need help on how to start with Dosbian-X, please feel free to ask for support in the discussion section.
 \n\n\nAWARDS
-\n\nThe existence of DOSBIAN couldn't be possible without the following gems:
+\n\nThe existence of DOSBIAN-X couldn't be possible without the following gems:
 \n\n* Raspbian    - The Debian distro for Raspberry Pi (www.raspberrypi.org)
 \n* DOSBox-X    - The fantastic DOS emulator (www.dosbox-x.com)
 \n* LaunchBox   - A DOS games Frontend (www.launchbox-app.com)

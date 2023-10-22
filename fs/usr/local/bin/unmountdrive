@@ -1,20 +1,11 @@
 #!/bin/bash
-destination=$1
-destination_file=""
+configuration_file=$1
 drive=""
 drive_lower=""
 
 BACKTITLE="*** DOSBIAN-X MOUNT DRIVE HELPER - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
 
-if [ $destination -eq 1 ]; then
-	destination_file="/home/pi/dosbian/dosbox-x.conf"
-fi;
-
-if [ $destination -eq 2 ]; then
-	destination_file="/home/pi/dosbian/programs/launchbx/launchbox.conf"
-fi;
-
-config_content=$(sudo cat $destination_file)
+config_content=$(sudo cat $configuration_file)
 config_content_lower=${config_content,,}
 
 
@@ -42,7 +33,7 @@ function choose_drive_to_remove
    line_to_remove="mount $drive_lower "
    if [[ $config_content_lower =~ $line_to_remove ]]; then
         #   remove the line
-	sudo sed -i -e "/$line_to_remove/Id" $destination_file
+	sudo sed -i -e "/$line_to_remove/Id" $configuration_file
         dialog --title "SUCCESS" --backtitle "$BACKTITLE" --msgbox "\nThe drive $drive has been unmounted successfully" 14 50
         exit
    else
