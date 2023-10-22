@@ -3,4 +3,3 @@ line_number=$1
 source_file=$2
 destination_file=$3
 head -n $line_number $source_file > $destination_file
-

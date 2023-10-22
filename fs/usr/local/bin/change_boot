@@ -11,7 +11,7 @@ if [ $? -ne 0 ]; then
    exit;
 fi;
 if [ -f "/media/usb0/splash.jpg" ]; then
-   sudo cp yes | /media/usb0/splash.jpg /usr/local/bin/.
+   sudo /usr/bin/cp /media/usb0/splash.jpg /usr/local/share/dosbian-x/splash.jpg
    dialog --clear --title "$BOOT_TITLE" --backtitle "$BACKTITLE" --msgbox "\nOperation completed. If you followed the instructions correcty, your splash screen will appear at next boot. " 12 60 
 else
    dialog --clear --title "$BOOT_TITLE" --backtitle "$BACKTITLE" --msgbox "\nOperation aborted!\n\nThe file 'splash.jpg' was not found in your USB key. " 12 60 

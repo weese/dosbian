@@ -23,12 +23,12 @@ If you need help on how to start with Dosbian, please feel free to ask support t
 
 TERMS OF USE
 
-DOSBIAN is a donationware project, this means you can modify, improve, customise it as you like for your
-own use. 
+DOSBIAN-X is a donationware project, this means you can modify, improve, customise it as you like for your
+own use.
 
-IT IS STRICTLY PROHIBITED: 
+IT IS STRICTLY PROHIBITED:
 
-- USE DOSBIAN FOR COMMERCIAL PURPOSES.
+- USE DOSBIAN-X FOR COMMERCIAL PURPOSES.
 
 - DIFFUSE YOUR OWN CUSTOMIZED COPY OF DOSBIAN
 

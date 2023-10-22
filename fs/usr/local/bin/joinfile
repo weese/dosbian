@@ -1,6 +1,0 @@
-#!/bin/bash
-source=$1
-destination=$2
-cat $1 >> $2
-
-

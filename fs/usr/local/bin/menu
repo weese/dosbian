@@ -3,58 +3,60 @@
 HEIGHT=52
 WIDTH=110
 CHOICE_HEIGHT=50
-BACKTITLE="*** DOSBIAN-X V2.0 - Your brand new 486DX machine :) - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
+BACKTITLE="*** DOSBIAN-X V2.0 - Your brand new 486DX machine :) - Developed by David Weese and Carmelo Maiolino (c) 2023 *** "
 TITLE="DOSBIAN-X version 2.0 - MENU"
 MENU="Use arrow keys to move through options"
 
 OPTIONS=(
-        "" ""
-        1 "  START MY SUPER DUPER 486DX: Boot Dosbian the way you have selected as default  "
+	"" ""
+	1 "  START MY SUPER DUPER 486DX: Boot Dosbian the way you have selected as default  "
 	2 "  CONFIGURATION HELPER: Helping you with first configuration steps "
- 	3 "  DOSBIAN CUSTOMIZATION: Change boot screen, enable/disable beep at startup"
-	4 "  UPDATE DOSBIAN: Keep updated your Dosbian distro (Require internet connection) "
+	3 "  DOSBIAN-X CUSTOMIZATION: Change boot screen, enable/disable beep at startup"
+	4 "  UPDATE DOSBIAN-X: Keep updated your Dosbian distro (Require internet connection) "
 	"" ""
-        "" "------------------------------------------------------------------------------------------"
+	"" "------------------------------------------------------------------------------------------"
 	"" ""
-        "" ">>> OPTIONAL PACKAGES <<<" 
-        "" ""
-       	5 "  ROLAND MT-32: Install Munt Emulator and add to Dosbox MT-32 support "
-        "" ""
-       	"" "------------------------------------------------------------------------------------------"
-        "" ">>> SET WHAT DOSBIAN HAS TO RUN AT BOOT <<<" 
-        "" ""
-        6 "  DOSBOX-X (Accurate emulation) "
-	7 "  LAUNCHBOX (An internal Dosbox game launchers to make your life easier) "
+	"" ">>> OPTIONAL PACKAGES <<<" 
 	"" ""
-       	"" "------------------------------------------------------------------------------------------"
-       	"" ""
-        "" ">>> NETWORK OPERATIONS <<<"
+	5 "  ROLAND MT-32: Install Munt Emulator and add to Dosbox MT-32 support "
+	"" ""
+	"" "------------------------------------------------------------------------------------------"
+	"" ">>> SET WHAT DOSBIAN-X HAS TO RUN AT BOOT <<<" 
+	"" ""
+	6 "  DOSBOX-X (Accurate emulation) "
+	7 "  DOSBOX-Staging (Lots of enhancements) "
+	8 "  DOSBOX-ECE (Enhanced Community Edition) "
+	9 "  DOSBOX-SVN (The original) "
+	"L" "  LAUNCHBOX (An internal Dosbox game launcher to make your life easier) "
+	"" ""
+	"" "------------------------------------------------------------------------------------------"
+	"" ""
+	"" ">>> NETWORK OPERATIONS <<<"
 	"" ""
 	"H" "  ENABLE DHCPCD: Slow down boot process, it uses dynamic ip addresses "
 	"K" "  DISABLE DHCPCD: Speed up boot process, only static ip addresses "
-        "" ""
+	"" ""
 	"X" "  CONFIGURE IPXBOX: Set network interface and port to use "
 	"E" "  ENABLE IPXBOX: Redirect net traffic to a real network "
-        "D" "  DISABLE IPXBOX: Disable the service "
+	"D" "  DISABLE IPXBOX: Disable the service "
 	"" ""
-        "" "------------------------------------------------------------------------------------------"
-        "" ">>> RASPBERRY PI CONFIGURATION AND UTILITIES <<<"
-        "" ""
+	"" "------------------------------------------------------------------------------------------"
+	"" ">>> RASPBERRY PI CONFIGURATION AND UTILITIES <<<"
+	"" ""
 	"C" "  RASPI-CONFIG: Run Raspberry Pi Configuration tool "
 	"M" "  MIDNIGHT COMMANDER: A friendly File Manager to copy your programs/games  "
 	"" ""
 	"R" "  REBOOT: Reboot your Raspberry Pi  "
-        "S" "  SHUTDOWN: Shutdown Raspberry Pi "
+	"S" "  SHUTDOWN: Shutdown Raspberry Pi "
 	"" ""
 	"" ""
-	"INFO" "  INFORMATION ABOUT DOSBIAN "
-        "" ""
+	"INFO" "  INFORMATION ABOUT DOSBIAN-X "
+	"" ""
 	"QUIT" "  QUIT: Exit and return to console "
-
 )
 
 
-fbi -t 2 -1 /usr/local/bin/dosbianmenu.jpg -noverbose 
+fbi -t 2 -1 /usr/local/share/dosbian-x/dosbianmenu.jpg -noverbose 
 
 
 while :
@@ -73,8 +75,8 @@ clear
 case $CHOICE in
 
 	1)  /usr/local/bin/bootmachine && menu
-            exit 0
-            ;;
+		exit 0
+		;;
 
 	2)  /usr/local/bin/menuconfigurator
 	    clear
@@ -85,78 +87,84 @@ case $CHOICE in
 	    ;;
 
 	QUIT)
-            tput cvvis
-            green=$(tput setaf 2)
-            normal=$(tput sgr0)
-            printf "\nDOSBIAN developed by Carmelo Maiolino and David Weese, (c) 2023\n\n"
-            printf "If you liked this distro and want to leave a comment or get updated about new releases, please, visit my blog at https://cmaiolino.wordpress.com/dosbian\n\n"
-	    printf "Need help/support about how to configure Dosbian and you don't know where to start from? Visit the Facebook community at www.facebook.com/groups/Dosbian\n\n"
-	    printf "DOSBIAN is a donationware project, this means you can modify, improve, customise it as you like for your own use."
-	    printf "\n\nIT IS STRICTLY PROHIBITED:"
-            printf "\n\n- USE DOSBIAN FOR COMMERCIAL PURPOSES"  
-	    printf "\n\n- DIFFUSE YOUR OWN CUSTOMIZED COPY OF DOSBIAN\n\n"
-            exit 0
-            ;;
+		tput cvvis
+		green=$(tput setaf 2)
+		normal=$(tput sgr0)
+		printf "\nDOSBIAN-X developed by Carmelo Maiolino and David Weese, (c) 2023\n\n"
+		printf "If you liked this distro and want to leave a comment or get updated about new releases, please, visit my blog at https://cmaiolino.wordpress.com/dosbian\n\n"
+		printf "Need help/support about how to configure Dosbian and you don't know where to start from? Visit the Facebook community at www.facebook.com/groups/Dosbian\n\n"
+		printf "DOSBIAN-X is a donationware project, this means you can modify, improve, customise it as you like for your own use."
+		printf "\n\nIT IS STRICTLY PROHIBITED:"
+		printf "\n\n- USE DOSBIAN-X FOR COMMERCIAL PURPOSES"  
+		printf "\n\n- DIFFUSE YOUR OWN CUSTOMIZED COPY OF DOSBIAN-X\n\n"
+		exit 0
+		;;
 
 	4)  sudo /usr/local/bin/dosbianupdate
-            ;;
+		;;
 
 	5)  sudo apt install munt-pidos
-            ;;
+		;;
 
 
-	6)
+	6)	sudo ln -sf /usr/local/bin/dosbox-x /usr/local/bin/dosbox
+		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-X set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
+		;;
+
+	7)	sudo ln -sf /usr/local/bin/dosbox-staging /usr/local/bin/dosbox
+		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-Staging set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
+		;;
+
+	8)	sudo ln -sf /usr/local/bin/dosbox-ece /usr/local/bin/dosbox
+		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-ECE set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
+		;;
+
+	9)	sudo ln -sf /usr/local/bin/dosbox-svn /usr/local/bin/dosbox
+		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-SVN set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
+		;;
+
+	L)  sudo ln -sf /usr/local/bin/launchbox /usr/local/bin/dosbox
+		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nLAUNCHBOX set successfully!\n\nNext time you reboot, you will be brought straightly to Launchbox frontend. ' 18 40
+		;;
             
-	    sudo sed -i '2c/usr/local/bin/dosbox-x >/dev/null 2>&1' /usr/local/bin/bootmachine
-            sudo chmod +x /usr/local/bin/bootmachine
-            dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-X set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
-            ;;
 
-	7)
+	H)  sudo systemctl enable dhcpcd.service
+		;;
 
-	    sudo sed -i '2c/usr/local/bin/dosbox-x -conf "/home/pi/dosbian/programs/launchbx/launchbox.conf" >/dev/null 2>&1' /usr/local/bin/bootmachine
-            sudo chmod +x /usr/local/bin/bootmachine
-            dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nLAUNCHBOX set successfully!\n\nNext time you reboot, you will be brought straightly to Launchbox frontend. ' 18 40
-            ;;
-            
-
-	H) sudo systemctl enable dhcpcd.service
-            ;;
-
-	K) sudo systemctl disable dhcpcd.service
-            ;;
+	K)  sudo systemctl disable dhcpcd.service
+		;;
 
 
-	X) /usr/local/bin/ipxboxconfig
+	X)  /usr/local/bin/ipxboxconfig
 	    dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nIPXBOX configuration changed successfully!\n\nChangements will be active from next reboot. ' 18 40
-            ;;
+		;;
 
 
-	E) sudo systemctl enable /etc/systemd/system/ipxbox.service
-	    dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nIPXBOX enabled successfully! \n\nChangements will be active from next reboot.' 18 40
-            ;;
+	E)  sudo systemctl enable /etc/systemd/system/ipxbox.service
+		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nIPXBOX enabled successfully! \n\nChangements will be active from next reboot.' 18 40
+		;;
 
 
-	D) sudo systemctl disable /etc/systemd/system/ipxbox.service
+	D)  sudo systemctl disable /etc/systemd/system/ipxbox.service
 	    dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nIpxbox disabled successfully! \n\nChangements will be active from next reboot.' 18 40
-            ;;
+		;;
 
-	C) sudo raspi-config
-            ;;
+	C)  sudo raspi-config
+		;;
 
-	M) sudo mc
-            ;;
+	M)  sudo mc
+		;;
 
- 	R) tput civis
-            sudo shutdown -r now
-            ;;
+ 	R)  tput civis
+		sudo shutdown -r now
+		;;
 
-        S) tput civis
-            sudo shutdown -h now
-            ;;
+	S)  tput civis
+		sudo shutdown -h now
+		;;
 
 	INFO) info
-              ;;
+		;;
 
 esac
 

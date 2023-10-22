@@ -8,8 +8,8 @@ BEEP_TITLE="ENABLE / DISABLE BEEP AT BOOT"
 FILE=/usr/local/bin/boot_sequence
 
 BEEP_OPTIONS=(
-        "" ""
-        1 " ENABLE BEEP AT BOOT"
+	"" ""
+	1 " ENABLE BEEP AT BOOT"
 	2 " DISABLE BEEP AT BOOT  "
 	"" ""
 )

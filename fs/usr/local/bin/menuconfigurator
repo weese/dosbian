@@ -8,8 +8,11 @@ EDIT_TITLE="CHOOSE A CONFIGURATION"
 
 EDIT_OPTIONS=(
 	"" ""
-	1 " WORK ON DOSBOX-X CONFIGURATION "
-	2 " WORK ON LAUNCHBOX CONFIGURATION  "
+	1 " CONFIGURE DOSBOX-X "
+	2 " CONFIGURE DOSBOX-STAGING "
+	3 " CONFIGURE DOSBOX-ECE "
+	4 " CONFIGURE DOSBOX-SVN "
+	5 " CONFIGURE LAUNCHBOX "
 	"" ""
 )
 
@@ -39,7 +42,7 @@ function edit_configuration
 	while :
 	do
 
-		configuration=$(dialog --clear \
+		emulator_no=$(dialog --clear \
                 --backtitle "$BACKTITLE" \
                 --title "$EDIT_TITLE" \
 		--menu "" \
@@ -54,15 +57,22 @@ function edit_configuration
 
 		clear
 
-		case $configuration in
+		case $emulator_no in
 
-			1)  main_menu 1
-	    		    break
-            		    ;;
+			1)  main_menu DOSBOX-X /home/pi/.config/dosbox-x/dosbox-x-2023.09.01.conf
+				;;
 
-			2)  main_menu 2
-            		   break 
-	    		    ;;
+			2)  main_menu DOSBOX-STAGING /home/pi/.config/dosbox/dosbox-staging.conf 
+				;;
+
+			3)  main_menu DOSBOX-ECE /home/pi/.dosbox/dosbox-ECE.conf 
+				;;
+
+			4)  main_menu DOSBOX-SVN /home/pi/.dosbox/dosbox-0.74-3.conf 
+				;;
+
+			5)  main_menu LAUNCHBOX /home/pi/dosbian/programs/launchbx/launchbox.conf 
+				;;
 
 		esac
 	done
@@ -72,37 +82,19 @@ function edit_configuration
 function main_menu
 {
 
-configuration="${1}"
+	emulator=$1
+	configuration_file=$2
 
 	while :
 	do
-		if [ $configuration -eq 1 ]; then
-
-			main_choice=$(dialog --clear \
-               	        --backtitle "$BACKTITLE" \
-                	--title "WORKING ON DOSBOX-X CONFIGURATION" \
-			--menu "" \
-                	$MAIN_HEIGHT $MAIN_WIDTH $MAIN_CHOICE_HEIGHT \
-                	"${MAIN_OPTIONS[@]}" \
-                	2>&1 >/dev/tty)
-			exit_status=$?
-
-		fi;
-
-
-		if [ $configuration -eq 2 ]; then
-
-			main_choice=$(dialog --clear \
-               	        --backtitle "$BACKTITLE" \
-                	--title "WORKING ON LAUNCHBOX CONFIGURATION" \
-			--menu "" \
-                	$MAIN_HEIGHT $MAIN_WIDTH $MAIN_CHOICE_HEIGHT \
-                	"${MAIN_OPTIONS[@]}" \
-                	2>&1 >/dev/tty)
-			exit_status=$?
-
-		fi;
-
+		main_choice=$(dialog --clear \
+					--backtitle "$BACKTITLE" \
+				--title "CONFIGURE $emulator" \
+		--menu "" \
+				$MAIN_HEIGHT $MAIN_WIDTH $MAIN_CHOICE_HEIGHT \
+				"${MAIN_OPTIONS[@]}" \
+				2>&1 >/dev/tty)
+		exit_status=$?
 
 
 		if [ $exit_status -ne 0 ]; then
@@ -115,29 +107,23 @@ configuration="${1}"
 
 		case $main_choice in
 
-			1)  if [ $configuration -eq 1 ]; then
-				sudo nano /home/pi/dosbian/dosbox-x.conf 
-			    fi;
-
-			    if [ $configuration -eq 2 ]; then
-				sudo nano /home/pi/dosbian/programs/launchbx/launchbox.conf 
-			    fi;	
-	    		    ;;
+			1)  sudo nano $configuration_file
+				;;
 
 			2)  menumedia
-	    		    ;;
+				;;
 
-			3)  mountdrive $configuration
-	    		    ;;
+			3)  mountdrive $configuration_file
+				;;
 
-			4)  imagemount $configuration
-	    		    ;;
+			4)  imagemount $configuration_file
+				;;
 
-			5)  unmountdrive $configuration
-	    		    ;;
+			5)  unmountdrive $configuration_file
+				;;
 
-			6)  configrestore $configuration
-	    		    ;;
+			6)  configrestore $emulator $configuration_file
+				;;
 
 		esac
 	done
