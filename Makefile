@@ -1,8 +1,12 @@
-# Latest (Raspberry Pi OS - Debian 11 Bullseye)
+# Previous (Raspberry Pi OS - Debian 11 Bullseye)
 IMG_BASE=2023-05-03-raspios-bullseye-arm64-lite
 IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-05-03/2023-05-03-raspios-bullseye-arm64-lite.img.xz
+
+# Latest (Raspberry Pi OS - Debian 12 Bookworm)
+# IMG_BASE=2023-10-10-raspios-bookworm-arm64-lite
+# IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-10-10/2023-10-10-raspios-bookworm-arm64-lite.img.xz
+
 IMG=Dosbian-X-2.1.0
-BRANCH=rpi-6.1.y
 DOCKERFILE=Dockerfile
 EXECUTE=docker run --rm \
 		--name build-image-dosbian \
@@ -55,4 +59,4 @@ final: images/${IMG}.img
 --privileged build-image-dosbian /bin/bash -c "scripts/execute.sh /images/Dosbian-X-2.1.0.img /bin/bash"
 
 # Mount network share
-#sudo mount.cifs -o user=weese //192.168.1.1/public/Software/Games perseus
+#sudo mount.cifs -o user=weese //192.168.1.1/public/Software/Games dosbian/perseus

@@ -14,7 +14,27 @@ export DEBIAN_FRONTEND=noninteractive
 export CFLAGS="-march=armv8-a+fp+crc+simd -mcpu=cortex-a53 -mtune=cortex-a53"
 export CXXFLAGS="-march=armv8-a+fp+crc+simd -mcpu=cortex-a53 -mtune=cortex-a53 -I/usr/local/include/openglide/"
 
+# Add docker DNS if necessary
+if [ ! -f /etc/resolv.conf ]; then
+cat << EOF > /etc/resolv.conf
+# DNS requests are forwarded to the host. DHCP DNS options are ignored.
+nameserver 192.168.65.7
+EOF
+fi
+
 # Add source repos
+. /etc/os-release
+if [ "$VERSION_ID" == "12" ]; then
+cat << EOF > /etc/apt/sources.list
+deb http://deb.debian.org/debian bookworm main contrib non-free
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free
+deb http://deb.debian.org/debian bookworm-updates main contrib non-free
+# Uncomment deb-src lines below then 'apt-get update' to enable 'apt-get source'
+deb-src http://deb.debian.org/debian bookworm main contrib non-free
+deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
+deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free
+EOF
+else
 cat << EOF > /etc/apt/sources.list
 deb http://deb.debian.org/debian bullseye main contrib non-free
 deb http://security.debian.org/debian-security bullseye-security main contrib non-free
@@ -24,6 +44,17 @@ deb-src http://deb.debian.org/debian bullseye main contrib non-free
 deb-src http://security.debian.org/debian-security bullseye-security main contrib non-free
 deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 EOF
+fi
+
+if [ "$VERSION_ID" == "12" ]; then
+    AV_VERSION=59
+    rm -f /boot/initrd.img-*-arm64
+else
+    AV_VERSION=58
+fi
+
+mv /usr/sbin/update-initramfs /usr/sbin/update-initramfs.bak
+ln -s /bin/echo /usr/sbin/update-initramfs
 
 apt clean && apt-get update && \
     apt install -y \
@@ -31,8 +62,8 @@ apt clean && apt-get update && \
     vim wget kpartx fdisk rsync sudo util-linux cloud-guest-utils \
     ca-certificates \
     automake gcc g++ make libncurses-dev nasm libsdl1.2-dev libsdl-net1.2-dev libpcap-dev \
-    libslirp-dev libavdevice58 libavformat-dev libavcodec-dev \
-    libavcodec-extra libavcodec-extra58 libswscale-dev libfreetype-dev \
+    libslirp-dev libavdevice$AV_VERSION libavformat-dev libavcodec-dev \
+    libavcodec-extra libavcodec-extra$AV_VERSION libswscale-dev libfreetype-dev \
     libopusfile-dev libspeexdsp-dev meson p7zip \
     libpng-dev zlib1g-dev libsdl-sound1.2-dev dos2unix cmake curl libtool \
     libsndfile1-dev libflac-dev subversion \

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 REPODIR=/dosbian
 
@@ -35,7 +35,9 @@ ln -s /usr/share/sounds/sf2/ /home/pi/.dosbox/soundfonts
 
 # Install Fluidsynth and SoundFont
 apt install -y fluidsynth
-curl https://musical-artifacts.com/artifacts/1484/ColomboMT32.sf2 -o /usr/share/sounds/sf2/ColomboMT32.sf2
+if [ ! -f /usr/share/sounds/sf2/ColomboMT32.sf2 ]; then
+  curl https://musical-artifacts.com/artifacts/1484/ColomboMT32.sf2 -o /usr/share/sounds/sf2/ColomboMT32.sf2
+fi
 
 # Make backup of dosbox config files
 mkdir -p /home/pi/.backup
@@ -53,12 +55,20 @@ fi
 
 # Disable unused services
 systemctl enable dosbian-splashscreen.service ipxbox.service
-systemctl disable bluetooth.service avahi-daemon.service dhcpcd.service dhcpcd5.service \
-  systemd-timesyncd.service rpi-display-backlight.service keyboard-setup.service wifi-country.service \
-  triggerhappy.service rsync.service hciuart.service console-setup.service \
-  nfs-client.target remote-fs.target apt-daily-upgrade.timer apt-daily.timer triggerhappy.socket
+systemctl disable \
+  systemd-timesyncd.service rsync.service remote-fs.target \
+  apt-daily-upgrade.timer apt-daily.timer
 
-#dbus-fi.w1.wpa_supplicant1.service
+. /etc/os-release
+if [ "$VERSION_ID" != "12" ]; then
+  systemctl disable \
+    avahi-daemon.service bluetooth.service dhcpcd.service dhcpcd5.service \
+    rpi-display-backlight.service keyboard-setup.service wifi-country.service \
+    triggerhappy.service triggerhappy.socket hciuart.service console-setup.service \
+    nfs-client.target
+fi
+
+#dbus-fi.w1.wpa_supplicant1.service 
 
 # Only keep a minimal set of services - speeds up the booting and increases stability
 
@@ -78,6 +88,9 @@ systemctl disable bluetooth.service avahi-daemon.service dhcpcd.service dhcpcd5.
 # dosbian.service                         enabled  
 
 
+# replace dtoverlay=vc4-kms-v3d with dtoverlay=vc4-kms-v3d,noaudio in /boot/config.txt
+sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,noaudio/' /boot/config.txt
+
 # boot config
 cat << EOF >> /boot/config.txt
 disable_splash=1
@@ -88,9 +101,16 @@ EOF
 
 # Use 1080p
 cat << EOF >> /boot/config.txt
+hdmi_force_hotplug=1
 hdmi_group=1
 hdmi_mode=16
+hdmi_drive=2
 EOF
 
-# disable terminal on serial
-# sed -i 's/console=serial0,115200//' /boot/cmdline.txt
+# kernel cmdline
+sed -i 's/rootwait/rootwait snd_bcm2835.enable_headphones=1 snd_bcm2835.enable_hdmi=1 snd_bcm2835.enable_compat_alsa=0/' /boot/cmdline.txt
+
+if [ "$VERSION_ID" == "12" ]; then
+  rm /etc/resolv.conf
+  # sed -i '$iraspi-config nonint do_wifi_country DE\nraspi-config nonint do_wifi_ssid_passphrase Kommune herold2612abc\nraspi-config nonint do_audio 1\nraspi-config nonint do_ssh 1' /usr/lib/raspberrypi-sys-mods/firstboot
+fi
