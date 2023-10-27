@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EDIT_HEIGHT=12
+EDIT_HEIGHT=13
 EDIT_WIDTH=54
 EDIT_CHOICE_HEIGHT=10
 BACKTITLE="*** DOSBIAN-X CONFIGURATION HELPER - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
@@ -17,7 +17,7 @@ EDIT_OPTIONS=(
 )
 
 
-MAIN_HEIGHT=18
+MAIN_HEIGHT=14
 MAIN_WIDTH=110
 MAIN_CHOICE_HEIGHT=16
 BACKTITLE="*** DOSBIAN-X CONFIGURATION HELPER - Developed by Carmelo Maiolino and David Weese (c) 2023 *** "
@@ -25,13 +25,13 @@ MAIN_TITLE="CONFIGURATION HELPER"
 
 MAIN_OPTIONS=(
 	"" ""
-	"" ""
 	1 " VIEW/EDIT CONFIGURATION   -  Change manually configuration  - "
 	2 " HDD IMAGE CREATOR         -  Create empty floppy / hdd images  - "
 	3 " MOUNT DRIVE               -  Mount drive to a local folder  - "
 	4 " MOUNT FILE IMAGE          -  Mount [ Floppy, HDD, CD-ROM ] file images  - "	
 	5 " UNMOUNT DRIVE/IMAGE       -  Remove [ Floppy, HDD, CD-ROM ] from configuration  - "
 	6 " RESTORE CONFIGURATION     -  Restore original configuration, lose all your settings  - "
+	"" ""
 )
 
 

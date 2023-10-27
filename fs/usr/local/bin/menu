@@ -90,7 +90,7 @@ case $CHOICE in
 		tput cvvis
 		green=$(tput setaf 2)
 		normal=$(tput sgr0)
-		printf "\nDOSBIAN-X developed by Carmelo Maiolino and David Weese, (c) 2023\n\n"
+		printf "\nDOSBIAN-X developed by David Weese and Carmelo Maiolino (c) 2023\n\n"
 		printf "If you liked this distro and want to leave a comment or get updated about new releases, please, visit my blog at https://cmaiolino.wordpress.com/dosbian\n\n"
 		printf "Need help/support about how to configure Dosbian and you don't know where to start from? Visit the Facebook community at www.facebook.com/groups/Dosbian\n\n"
 		printf "DOSBIAN-X is a donationware project, this means you can modify, improve, customise it as you like for your own use."
@@ -107,23 +107,23 @@ case $CHOICE in
 		;;
 
 
-	6)	sudo ln -sf /usr/local/bin/dosbox-x /usr/local/bin/dosbox
+	6)	sudo ln -sf dosbox-x /usr/local/bin/dosbox
 		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-X set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
 		;;
 
-	7)	sudo ln -sf /usr/local/bin/dosbox-staging /usr/local/bin/dosbox
+	7)	sudo ln -sf dosbox-staging /usr/local/bin/dosbox
 		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-Staging set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
 		;;
 
-	8)	sudo ln -sf /usr/local/bin/dosbox-ece /usr/local/bin/dosbox
+	8)	sudo ln -sf dosbox-ece /usr/local/bin/dosbox
 		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-ECE set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
 		;;
 
-	9)	sudo ln -sf /usr/local/bin/dosbox-svn /usr/local/bin/dosbox
+	9)	sudo ln -sf dosbox-svn /usr/local/bin/dosbox
 		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nDOSBox-SVN set successfully!\n\nNext time you reboot, you will be brought straightly to the Dosbox Shell. ' 18 40
 		;;
 
-	L)  sudo ln -sf /usr/local/bin/launchbox /usr/local/bin/dosbox
+	L)  sudo ln -sf launchbox /usr/local/bin/dosbox
 		dialog --backtitle "$BACKTITLE" --title "Information" --msgbox '\n\nLAUNCHBOX set successfully!\n\nNext time you reboot, you will be brought straightly to Launchbox frontend. ' 18 40
 		;;
             

@@ -19,6 +19,9 @@ if [ -d $REPODIR/fs.extra ]; then
 fi
 cp $REPODIR/fs/home/pi/.profile /home/pi/
 
+# Make DOSBox-X default
+ln -sf dosbox-x /usr/bin/dosbox
+
 # Clone Dosbox Shader Pack
 git clone https://github.com/tyrells/dosbox-svn-shaders.git /home/pi/.config/dosbox/glshaders
 ln -s /home/pi/.config/dosbox/glshaders /home/pi/.config/dosbox-x/glshaders
@@ -103,7 +106,7 @@ EOF
 cat << EOF >> /boot/config.txt
 hdmi_force_hotplug=1
 hdmi_group=1
-hdmi_mode=16
+hdmi_mode=82
 hdmi_drive=2
 EOF
 
