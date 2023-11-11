@@ -1,4 +1,4 @@
 #!/bin/bash
 #sleep 2s
 #/usr/bin/play /usr/local/share/dosbian-x/beep.wav ;
-/usr/bin/fbi -noverbose /usr/local/share/dosbian-x/splash.jpg
+/usr/bin/fbi -noverbose /usr/local/share/dosbian-x/boot.png

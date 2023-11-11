@@ -19,4 +19,4 @@
 /usr/local/bin/unmountdrive
 /usr/local/share/dosbian-x/beep.wav
 /usr/local/share/dosbian-x/dosbianmenu.jpg
-/usr/local/share/dosbian-x/splash.jpg
+/usr/local/share/dosbian-x/boot.png

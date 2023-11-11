@@ -3,7 +3,7 @@ Description=Dosbian loading service
 DefaultDependencies=no
 
 [Service]
-#ExecStart=/usr/bin/fbi -noverbose /usr/local/share/dosbian-x/splash.jpg
+#ExecStart=/usr/bin/fbi -noverbose /usr/local/share/dosbian-x/boot.png
 ExecStart=/usr/local/bin/boot_sequence
 
 StandardInput=tty
