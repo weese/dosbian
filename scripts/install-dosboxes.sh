@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 
-SDL2_BRANCH=release-2.28.3
+SDL2_BRANCH=release-2.28.4
 SDL2_NET_BRANCH=release-2.2.0
 SDL2_IMAGE_BRANCH=release-2.6.3
-FLUIDSYNTH_BRANCH=v2.3.2
+FLUIDSYNTH_BRANCH=v2.3.4
 DOSBOX_SVN_VERSION=RELEASE_0_74_3
 DOSBOX_ECE_VERSION=r4482
-DOSBOX_X_BRANCH=dosbox-x-v2023.09.01
-DOSBOX_STAGING_BRANCH=v0.79.1
+DOSBOX_X_BRANCH=dosbox-x-v2023.10.06
+DOSBOX_STAGING_BRANCH=v0.80.1
 
 export DEBIAN_FRONTEND=noninteractive
 export CFLAGS="-march=armv8-a+fp+crc+simd -mcpu=cortex-a53 -mtune=cortex-a53"
@@ -34,7 +34,7 @@ deb-src http://deb.debian.org/debian bookworm main contrib non-free
 deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
 deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free
 EOF
-else
+elif [ "$VERSION_ID" == "11" ]; then
 cat << EOF > /etc/apt/sources.list
 deb http://deb.debian.org/debian bullseye main contrib non-free
 deb http://security.debian.org/debian-security bullseye-security main contrib non-free
@@ -44,33 +44,53 @@ deb-src http://deb.debian.org/debian bullseye main contrib non-free
 deb-src http://security.debian.org/debian-security bullseye-security main contrib non-free
 deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 EOF
+elif [ "$VERSION_ID" == "10" ]; then
+cat << EOF > /etc/apt/sources.list
+deb http://deb.debian.org/debian buster main contrib non-free
+deb http://deb.debian.org/debian buster-backports main contrib non-free
+deb http://security.debian.org/debian-security buster/updates main contrib non-free
+deb http://deb.debian.org/debian buster-updates main contrib non-free
+# Uncomment deb-src lines below then 'apt-get update' to enable 'apt-get source'
+deb-src http://deb.debian.org/debian buster main contrib non-free
+deb-src http://deb.debian.org/debian buster-backports main contrib non-free
+deb-src http://security.debian.org/debian-security buster/updates main contrib non-free
+deb-src http://deb.debian.org/debian buster-updates main contrib non-free
+EOF
 fi
 
+LIB_FREETYPE=libfreetype-dev
 if [ "$VERSION_ID" == "12" ]; then
     AV_VERSION=59
     rm -f /boot/initrd.img-*-arm64
 else
     AV_VERSION=58
+    if [ "$VERSION_ID" == "10" ]; then
+        LIB_FREETYPE=libfreetype6-dev
+    fi
 fi
 
 mv /usr/sbin/update-initramfs /usr/sbin/update-initramfs.bak
 ln -s /bin/echo /usr/sbin/update-initramfs
 
-apt clean && apt-get update && \
-    apt install -y \
+apt clean
+apt-get update
+apt-get -y upgrade
+apt install -y \
     git bc bison flex libssl-dev python3 make kmod libc6-dev libncurses5-dev \
     vim wget kpartx fdisk rsync sudo util-linux cloud-guest-utils \
     ca-certificates \
-    automake gcc g++ make libncurses-dev nasm libsdl1.2-dev libsdl-net1.2-dev libpcap-dev \
+    automake gcc g++ make libncurses-dev nasm libsdl1.2-compat libsdl1.2-compat-dev libpcap-dev \
     libslirp-dev libavdevice$AV_VERSION libavformat-dev libavcodec-dev \
-    libavcodec-extra libavcodec-extra$AV_VERSION libswscale-dev libfreetype-dev \
+    libavcodec-extra libavcodec-extra$AV_VERSION libswscale-dev $LIB_FREETYPE \
     libopusfile-dev libspeexdsp-dev meson p7zip \
-    libpng-dev zlib1g-dev libsdl-sound1.2-dev dos2unix cmake curl libtool \
+    libpng-dev zlib1g-dev dos2unix cmake curl libtool \
     libsndfile1-dev libflac-dev subversion \
     libdrm-dev libgbm-dev \
     libncurses5 fbi dialog mc sox \
     libxkbfile-dev fluidsynth libfluidsynth-dev \
-    libsdl2-dev libsdl2-image-dev libsdl2-net-dev
+    libsdl2-dev libsdl2-image-dev libsdl2-net-dev \
+    libopengl0 kmscube libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+
 
 apt build-dep -y libsdl2
 apt clean
@@ -155,6 +175,7 @@ mv /usr/local/bin/dosbox /usr/local/bin/dosbox-ece
 cd /build
 git clone --depth=1 https://github.com/dosbox-staging/dosbox-staging -b $DOSBOX_STAGING_BRANCH
 cd /build/dosbox-staging
+sed -i -e "s@'>= 0.57.0'@\'>= 0.56.0'@" meson.build
 meson setup build/release
 meson compile -C build/release
 cd /build/dosbox-staging/build/release

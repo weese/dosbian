@@ -20,7 +20,7 @@ fi
 cp $REPODIR/fs/home/pi/.profile /home/pi/
 
 # Make DOSBox-X default
-ln -sf dosbox-x /usr/bin/dosbox
+ln -sf dosbox-x /usr/local/bin/dosbox
 
 # Clone Dosbox Shader Pack
 git clone https://github.com/tyrells/dosbox-svn-shaders.git /home/pi/.config/dosbox/glshaders
@@ -37,7 +37,7 @@ ln -s /usr/share/sounds/sf2/ /home/pi/.config/dosbox-x/soundfonts
 ln -s /usr/share/sounds/sf2/ /home/pi/.dosbox/soundfonts
 
 # Install Fluidsynth and SoundFont
-apt install -y fluidsynth
+apt install -y fluidsynth pulseaudio
 if [ ! -f /usr/share/sounds/sf2/ColomboMT32.sf2 ]; then
   curl https://musical-artifacts.com/artifacts/1484/ColomboMT32.sf2 -o /usr/share/sounds/sf2/ColomboMT32.sf2
 fi
@@ -91,29 +91,41 @@ fi
 # dosbian.service                         enabled  
 
 
-# replace dtoverlay=vc4-kms-v3d with dtoverlay=vc4-kms-v3d,noaudio in /boot/config.txt
-sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,noaudio/' /boot/config.txt
-
 # boot config
 cat << EOF >> /boot/config.txt
 disable_splash=1
 boot_delay=0
 dtoverlay=sdtweak,overclock_50=100
-gpu_mem=64
+gpu_mem=128
 EOF
 
-# Use 1080p
-cat << EOF >> /boot/config.txt
-hdmi_force_hotplug=1
-hdmi_group=1
-hdmi_mode=82
-hdmi_drive=2
-EOF
+# these are possible additions, if you experience problems with your screen
+# cat << EOF >> /boot/config.txt
+# hdmi_force_hotplug=1
+# hdmi_group=1
+# hdmi_mode=82
+# hdmi_drive=2
+# EOF
 
-# kernel cmdline
-sed -i 's/rootwait/rootwait snd_bcm2835.enable_headphones=1 snd_bcm2835.enable_hdmi=1 snd_bcm2835.enable_compat_alsa=0/' /boot/cmdline.txt
+# adapt kernel command line
+# I had to manually add overscan as my screen was cut off on my TV set
+sed -i 's/rootwait/rootwait logo.nologo vt.global_cursor_default=0 loglevel=1 consoleblank=0 splash quiet video=HDMI-A-1:1920x1080M@60,margin_left=40,margin_right=40,margin_top=24,margin_bottom=20/' /boot/cmdline.txt
+
+# WARNING:
+# Uncommenting the following lines is not recommended and should only be done if you have problems with audio or video
+#
+# If you want to use the analog audio output and ALSA (instead of PulseAudio), you can use these settings instead
+# sed -i 's/rootwait/rootwait snd_bcm2835.enable_headphones=1 snd_bcm2835.enable_hdmi=1 snd_bcm2835.enable_compat_alsa=0/' /boot/cmdline.txt
+#
+# However, I've experienced a couple of weird issues with the BCM2835 driver (screen turned off, when sound was used in a game)
+# So, I had to at least disable the audio in the KMS driver
+# sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,noaudio/' /boot/config.txt
+#
+# ... or disable KMS driver completely (then you need to replace output=opengl with output=surface in all dosbox.conf files)
+# sed -i 's/dtoverlay=vc4-kms-v3d/#dtoverlay=vc4-kms-v3d/' /boot/config.txt
 
 if [ "$VERSION_ID" == "12" ]; then
   rm /etc/resolv.conf
-  # sed -i '$iraspi-config nonint do_wifi_country DE\nraspi-config nonint do_wifi_ssid_passphrase Kommune herold2612abc\nraspi-config nonint do_audio 1\nraspi-config nonint do_ssh 1' /usr/lib/raspberrypi-sys-mods/firstboot
+  # From Debian 12 Bookworm on, wpa_supplicant.conf and ssh in the /boot folder is not supported anymore
+  # sed -i '$iraspi-config nonint do_wifi_country DE\nraspi-config nonint do_wifi_ssid_passphrase <YOUR_WIFI_SSID> <YOUR_WIFI_PW>\nraspi-config nonint do_audio 1\nraspi-config nonint do_ssh 1' /usr/lib/raspberrypi-sys-mods/firstboot
 fi
