@@ -6,7 +6,7 @@
 # IMG_BASE=2023-05-03-raspios-bullseye-arm64-lite
 # IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-05-03/2023-05-03-raspios-bullseye-arm64-lite.img.xz
 
-# Latest (Raspberry Pi OS - Debian 12 Bookworm)
+# Latest (Raspberry Pi OS - Debian 12 Bookworm) - required for libsdl1.2-compat (required for Dosbox-SVN/ECE as surface output won't scale)
 IMG_BASE=2023-10-10-raspios-bookworm-arm64-lite
 IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-10-10/2023-10-10-raspios-bookworm-arm64-lite.img.xz
 

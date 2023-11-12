@@ -6,7 +6,7 @@ SDL2_NET_BRANCH=release-2.2.0
 SDL2_IMAGE_BRANCH=release-2.6.3
 FLUIDSYNTH_BRANCH=v2.3.4
 DOSBOX_SVN_VERSION=RELEASE_0_74_3
-DOSBOX_ECE_VERSION=r4482
+DOSBOX_ECE_VERSION=latest_build
 DOSBOX_X_BRANCH=dosbox-x-v2023.10.06
 DOSBOX_STAGING_BRANCH=v0.80.1
 
@@ -27,20 +27,24 @@ fi
 if [ "$VERSION_ID" == "12" ]; then
 cat << EOF > /etc/apt/sources.list
 deb http://deb.debian.org/debian bookworm main contrib non-free
+deb http://deb.debian.org/debian bookworm-backports main contrib non-free
 deb http://security.debian.org/debian-security bookworm-security main contrib non-free
 deb http://deb.debian.org/debian bookworm-updates main contrib non-free
 # Uncomment deb-src lines below then 'apt-get update' to enable 'apt-get source'
 deb-src http://deb.debian.org/debian bookworm main contrib non-free
+deb-src http://deb.debian.org/debian bookworm-backports main contrib non-free
 deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
 deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free
 EOF
 elif [ "$VERSION_ID" == "11" ]; then
 cat << EOF > /etc/apt/sources.list
 deb http://deb.debian.org/debian bullseye main contrib non-free
+deb http://deb.debian.org/debian bullseye-backports main contrib non-free
 deb http://security.debian.org/debian-security bullseye-security main contrib non-free
 deb http://deb.debian.org/debian bullseye-updates main contrib non-free
 # Uncomment deb-src lines below then 'apt-get update' to enable 'apt-get source'
 deb-src http://deb.debian.org/debian bullseye main contrib non-free
+deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free
 deb-src http://security.debian.org/debian-security bullseye-security main contrib non-free
 deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 EOF
@@ -160,12 +164,9 @@ make -j4 install
 mv /usr/local/bin/dosbox /usr/local/bin/dosbox-svn
 
 # Compile Dosbox-ECE
-mkdir /build/dosbox-ece
+cd /build
+git clone --depth=1 https://github.com/realnc/dosbox-ece.git -b $DOSBOX_ECE_VERSION
 cd /build/dosbox-ece
-wget -O dosbox-ece.7z "https://yesterplay.net/dosboxece/download/DOSBox%20ECE%20$DOSBOX_ECE_VERSION%20(source).7z"
-p7zip -d dosbox-ece.7z
-find . -type f -exec dos2unix {} \;
-chmod a+x autogen.sh
 ./autogen.sh
 ./configure
 make -j4 install
@@ -173,7 +174,7 @@ mv /usr/local/bin/dosbox /usr/local/bin/dosbox-ece
 
 # Compile Dosbox-Staging
 cd /build
-git clone --depth=1 https://github.com/dosbox-staging/dosbox-staging -b $DOSBOX_STAGING_BRANCH
+git clone --depth=1 https://github.com/dosbox-staging/dosbox-staging.git -b $DOSBOX_STAGING_BRANCH
 cd /build/dosbox-staging
 sed -i -e "s@'>= 0.57.0'@\'>= 0.56.0'@" meson.build
 meson setup build/release

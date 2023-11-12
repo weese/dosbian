@@ -56,7 +56,7 @@ OPTIONS=(
 )
 
 
-fbi -t 2 -1 /usr/local/share/dosbian-x/dosbianmenu.jpg -noverbose 
+fbi -t 3 -1 /usr/local/share/dosbian-x/dosbianmenu.png -noverbose 
 
 
 while :
